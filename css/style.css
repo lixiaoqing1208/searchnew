@@ -102,6 +102,8 @@ border-radius:3px;
 .search_onfocus .result_list{display:none;}
 .search_onfocus .icon_del{display:block;}
 .search_onfocus .icon_arrowLeft{display:inline-block;}
+.search_onfocus .head .logo{display:none;}
+.search_onfocus .head .l{float:none;}
 
 .page_foot{background:url(../images/next_bgFoot.gif) repeat-x;height:28px;}
 .page_foot .next_page{background:none;line-height:28px;}
