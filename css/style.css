@@ -86,7 +86,7 @@ border-radius:3px;
 .article .word{font-size:12px;line-height:15px;}
 .article .word p{text-indent:2em;margin:0 0 4px;}
 .weather{font-size:12px;}
-.weather table td{text-align:center;padding-right:3px;font-size:12px;}
+.weather table td{text-align:center;padding:0 3px 0 0;font-size:12px;}
 .weather_tip{color:#999;}
 
 
