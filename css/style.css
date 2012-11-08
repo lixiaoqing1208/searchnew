@@ -20,18 +20,18 @@ box-shadow:1px 1px 3px #a4a7a3 inset;}
 .copyright{font-size:12px;}
     /**icon**/
 .icon{display:inline-block;font-size:0;overflow:hidden;}
-.icon_search{background:url(../images/icon_search.gif) no-repeat;width:12px;height:12px;  position:absolute;top:8px;left:6px;}
-.icon_add{background:url(../images/icon_add.gif) no-repeat;width:10px;height:10px; position:absolute;top:8px;right:6px;}
+.icon_search{background:url(../images/icon_search.gif) no-repeat;width:12px;height:12px; margin:0px 10px 0 5px;display:inline-block; vertical-align:middle;}
+.icon_add{background:url(../images/icon_add.gif) no-repeat;width:10px;height:10px;margin:0px 0px 0 10px;display:inline-block; vertical-align:middle;}
 .ajax_loader{background:url(../images/ajax-loader.gif) no-repeat;width:16px;height:16px;vertical-align:middle;margin:-2px 4px 0 0;}
 .icon_del{display:none;background:url(../images/icon_del.gif) no-repeat;width:11px;height:11px;  position:absolute;top:7px;left:224px;}
 .arrow_down{background:url(../images/arrow_down.gif) no-repeat;width:10px;height:9px;margin:-3px 0 0 3px;}
 .icon_phone{background:url(../images/icon_phone.gif) no-repeat;width:7px;height:10px;}
 .return_top{background:url(../images/return_top.gif) no-repeat;width:38px;height:28px;float:right;}
 /**下拉菜单**/
- .search_list li{height:28px;border-bottom:1px solid #999;position:relative;text-align:left;padding:0 20px 0 30px;}
+ .search_list li{height:28px;border-bottom:1px solid #999;position:relative;text-align:left;}
  .search_list{width:205px;margin:0 0 0 35px;text-align:left;}
  .search_list ul{background:#fff;font-size:12px;}
- .search_list .word{width:140px;display:inline-block;line-height:28px;}
+ .search_list .word{width:140px;display:inline-block;line-height:28px; vertical-align:middle;}
 /**结果页**/
 .result_list{border-top:1px solid #E0E3DF;margin-top:10px;padding-top:7px;}
 .result_list .dk_content{margin-bottom:12px;}
