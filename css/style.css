@@ -76,9 +76,9 @@ border-radius:3px;
 .app_opt{padding-bottom:7px;}
 .novel_text{font-size:12px;margin:8px 0 10px;}
 
-.top{background:url(../images/top_bg.gif) repeat-x;height:41px;padding-left:63px;position:relative;}
+.top{background:url(../images/top_bg.gif) repeat-x;height:41px;}
 .top .title{line-height:41px;text-align:center;font-size:18px;font-weight:bold;}
-.return_prev{display:block;background:url(../images/return_prev.gif) no-repeat;height:41px;width:63px;position:absolute;top:0;left:0;}
+.return_prev{display:block;background:url(../images/return_prev.gif) no-repeat;height:41px;width:63px;float:left;}
 .prev_page{display:block;background:url(../images/top_line.gif) no-repeat; float:right;font-size:16px;color:#333;height:41px;line-height:41px;width:54px;padding-left:10px;}
 .article{margin:7px 0;padding:0 10px;}
 .article .title{font-size:15px;}
