@@ -106,4 +106,4 @@ border-radius:3px;
 .search_onfocus .head .l{float:none;}
 
 .page_foot{background:url(../images/next_bgFoot.gif) repeat-x;height:28px;}
-.page_foot .next_page{background:none;line-height:28px;}
+.page_foot .next_page{background:none;line-height:28px;display:block;height:28px;}
