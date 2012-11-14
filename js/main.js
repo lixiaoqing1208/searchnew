@@ -18,6 +18,7 @@
 	// 添加事件句柄
 	function addEvent (dom, type, callback) {
 		if (!dom) {return;}
+
 		if (dom.addEventListener) {
 			dom.addEventListener(type, callback, false);
 		}
@@ -28,40 +29,75 @@
 			dom['on' + type] = callback;
 		}
 	}
+	// 删除事件监视
+	function removeEvent (dom, type, callback) {
+		if (!dom) {return;}
+
+		if (dom.removeEventListener) {
+			dom.removeEventListener(type, callback, false);
+		}
+		else if (dom.detachEvent) {
+			dom.detachEvent('on' + type, callback);
+		}
+	}
 	// 为obj绑定方法
 	function bind (func, obj) {
 		return function () {
 			func.apply(obj, arguments);
 		};
 	}
+	// 添加tap事件(touchstart,touchmove,touchend)
+	function addEventTap (dom, callback) {
+		var moved = false;
+		addEvent(dom, 'touchstart', function () {
+			addEvent(dom, 'touchmove', function () {
+				moved = true;
+			});
+		});
+
+		addEvent(dom, 'touchend', function (e) {
+			if (moved) {
+				moved = false;
+			}
+			else {
+				callback.call(null, e);
+			}
+		});
+	}
 
 
 	/**
 	 * 查找
 	 * @Search
-	 * @param {String} inputId 输入框id
-	 * @param {String} submitId 提交按钮id
-	 * @param {String} listId 列表id
-	 * @param {String} submitUrl 提交链接
+	 * @param {String} config.suggestUrl 输入时动态建议的地址
+	 * @param {String} config.prefixCallback 动态建议数据反回时回调函数的前缀
 	 */
 	function Search (config) {
 		this.dom = {};
-		this.dom.input = $(config.inputId);
-		this.dom.submit = $(config.submitId);
-		this.dom.list = $(config.listId);
-		this.dom.del = $(config.deleteId);
+		// 必要的dom节点
+		this.dom.form =   $('searchForm');
+		this.dom.input =  $('searchInput');
+		this.dom.submit = $('searchSubmit');
+		this.dom.list =   $('searchList');
+		this.dom.del =    $('searchDel');
+		this.dom.back =   $('searchBack');
+		// 底部额外搜索部分
+		this.dom.footInput = $('searchInputFoot');
+		this.dom.footSubmit = $('searchInputSubmit');
 
 		// 一旦提交就不可再次提交
 		this._submitLock = false;
 
-		this.submitUrl = config.submitUrl || '';
-		this._funcPrev = config.funcPrev || '_cbfnc_';
+		// suggest请求地址
+		this._suggestUrl = config.suggestUrl;
+		// suggest返回数据的回调函数前缀
+		this._funcPrev = config.prefixCallback || '_cbfnc_';
 		this._oldSuggestFunctionName;
 
 		// 保证所需id都存在
-		if (this.dom.input && this.dom.submit) {
+		if (this.dom.input && this.dom.submit && this.dom.list) {
 			// 记录最先的推荐数据
-			this._defaultList = this.dom.list && this.dom.list.innerHTML || '';
+			this._defaultList = this.dom.list.innerHTML || '';
 			this._init();
 		}
 	}
@@ -70,70 +106,65 @@
 		 * 初始化事件
 		 */
 		_init: function () {
-			if (this.dom.list) {
-				addEvent(this.dom.input, 'focus', bind(this._eFocus, this));
-				addEvent(this.dom.input, 'keyup', bind(this._eKeyup, this));
-				addEvent(this.dom.del, 'click', bind(this._eClearInput, this));
-				addEvent(this.dom.list, 'click', bind(this._eSuggestClick, this));
+			addEvent(this.dom.input, 'focus', bind(this._eFocus, this));
+			addEvent(this.dom.input, 'keyup', bind(this._eKeyup, this));
+			addEventTap(this.dom.del, bind(this._eClearInput, this));
+			addEventTap(this.dom.list, bind(this._eSuggestClick, this));
+			addEventTap(this.dom.submit, bind(this._eSubmit, this));
+			addEventTap(this.dom.back, bind(this._eBack, this));
+			// 底部额外搜索框
+			addEvent(this.dom.footInput, 'focus', bind(function (evt) {
+				this.dom.footInput.blur();
+				this.dom.input.focus();
 
-				// 点击区域外关闭
-				addEvent(this.dom.list.parentNode, 'click', bind(function (evt) {
-						evt = evt || global.event;
-						if (evt.stopPropagation) {
-							evt.stopPropagation();
-						}
-						else {
-							evt.cancelBubble = true;
-						}
-					}, this));
-				addEvent(document, 'click', bind(function (evt) {
-						this.hideList();
-					}, this));
-			}
-			// 不出list
-			else {
-				addEvent(this.dom.del, 'click', bind(function () {
-						this.dom.input.value = '';
-						this.dom.input.focus();
-					}, this));
-				addEvent(this.dom.input, 'keyup', bind(function (evt) {
-						evt = evt || global.event;
+				evt = evt || global.event;
+				if (evt.preventDefault) {
+					evt.preventDefault();
+					evt.stopPropagation();
+				}
+				else {
+					evt.returnValue = false;
+					eve.cancelBubble = true;
+				}
+			}, this));
+			addEventTap(this.dom.footSubmit, bind(function (evt) {
+				this.dom.submit.click();
 
-						// 回车键提交
-						if (evt.which === 13) {
-							this.submit();
-						}
-
-						if (this.getValue()) {
-							this.showDel();
-						}
-						else {
-							this.hideDel();
-						}
-					}, this));
-				addEvent(this.dom.input, 'focus', bind(function (evt) {
-						if (this.getValue()) {
-							this.showDel();
-						}
-						else {
-							this.hideDel();
-						}
-					}, this));
-			}
-			addEvent(this.dom.submit, 'click', bind(this._eSubmit, this));
+				evt = evt || global.event;
+				if (evt.preventDefault) {
+					evt.preventDefault();
+					evt.stopPropagation();
+				}
+				else {
+					evt.returnValue = false;
+					eve.cancelBubble = true;
+				}
+			}, this));
 		},
 		/**
 		 * 事件处理
 		 */
 		_eFocus: function (evt) {
+			var wrap = this.dom.form.parentNode,
+				className = wrap.className;
+			// 一直查找到最上层“..._wrap”
+			while (className.indexOf('_wrap') === -1) {
+				wrap = wrap.parentNode;
+				className = wrap.className;
+			}
+			if (className.indexOf('search_onfocus') === -1) {
+				wrap.className = className + ' search_onfocus';
+			}
+
 			if (!this.getValue()) {
 				this.dom.list.innerHTML = this._defaultList;
 				this.showList();
+				this.hideDel();
 			}
 			else {
+				this.showDel();
 				this.requestNewSuggest();
 			}
-			//this.showList();
 		},
 		_eKeyup: function (evt) {
 			evt = evt || global.event;
@@ -141,6 +172,14 @@
 			// 回车键提交
 			if (evt.which === 13) {
 				this.submit();
+				if (evt.preventDefault) {
+					evt.preventDefault();
+					evt.stopPropagation();
+				}
+				else {
+					evt.returnValue = false;
+					evt.cancelBubble = true;
+				}
 			}
 			else {
 				this.requestNewSuggest();
@@ -148,6 +187,7 @@
 		},
 		_eClearInput: function (evt) {
 			this.dom.input.value = '';
+			this.hideDel();
 			this.dom.list.innerHTML = this._defaultList;
 
 			evt = evt || global.event;
@@ -158,8 +198,38 @@
 				evt.returnValue = false;
 			}
 		},
+		_eBack: function (evt) {
+			var wrap = this.dom.form.parentNode,
+				className = wrap.className;
+			while (className.indexOf('_wrap') === -1) {
+				wrap = wrap.parentNode;
+				className = wrap.className;
+			}
+			wrap.className = className.replace('search_onfocus', '');
+
+			this.hideList();
+			this.hideDel();
+
+			this.dom.input.blur();
+			
+			evt = evt || global.event;
+			if (evt.preventDefault) {
+				evt.preventDefault();
+			}
+			else {
+				evt.returnValue = false;
+			}
+		},
 		_eSubmit: function (evt) {
 			this.submit();
+
+			evt = evt || global.event;
+			if (evt.preventDefault) {
+				evt.preventDefault();
+			}
+			else {
+				evt.returnValue = false;
+			}
 		},
 		_eSuggestClick: function (evt) {
 			var target, className;
@@ -169,7 +239,7 @@
 			className = target.className || '';
 
 			this.dom.input.value =
-				target.tagName.toUpperCase() === 'LI' ? target.innerText : target.parentNode.innerText;
+				trim(target.tagName.toUpperCase() === 'LI' ? target.innerText : target.parentNode.innerText);
 			if (className.indexOf('icon_add') === -1) {
 				this.hideList();
 				this.submit();
@@ -178,18 +248,34 @@
 				this.dom.input.focus();
 				this.requestNewSuggest();
 			}
+
+			if (evt.preventDefault) {
+				evt.preventDefault();
+				evt.stopPropagation();
+			}
+			else {
+				evt.returnValue = false;
+				evt.cancelBubble = true;
+			}
 		},
 		showList: function () {
-			if(this.dom.list) { this.dom.list.style.display = 'block'; }
+			var list = this.dom.list;
+			if(list) {
+				list.style.height = global.innerHeight - 40 + 'px';
+				list.style.display = 'block';
+			}
 		},
 		hideList: function () {
-			if(this.dom.list) { this.dom.list.style.display = 'none'; }
+			var list = this.dom.list;
+			if(list) { list.style.display = 'none'; }
 		},
 		showDel: function () {
-			if(this.dom.del) { this.dom.del.style.display = 'block'; }
+			var del = this.dom.del;
+			if(del) { del.style.display = 'block'; }
 		},
 		hideDel: function () {
-			if (this.dom.del) { this.dom.del.style.display = 'none'; }
+			var del = this.dom.del;
+			if (del) { del.style.display = 'none'; }
 		},
 		/**
 		 * 获取value值
@@ -206,15 +292,19 @@
 
 			if (!this._submitLock && v) {
 				this._submitLock = true;
-				// 跳转 或 form提交
-				document.location = this.submitUrl + '?key=' + v;
+				// form提交
+				if (this.dom.form) {
+					this.dom.form.submit();
+				}
 			}
 		},
 		requestNewSuggest: function () {
 			var v = this.getValue(),
+				oldScriptDom,
 				script, funcName;
 
 			if (v) {
+				this.showDel();
 				// 与上次不同则新请求
 				if (v === this._oldValue) {
 					this.showList();
@@ -223,10 +313,13 @@
 					this._oldValue = v;
 					// 保证返回顺序
 					if (this._oldSuggestFunctionName) { // 删除旧的
+						oldScriptDom = $(this._oldSuggestFunctionName);
+						oldScriptDom.parentNode.removeChild(oldScriptDom);
 						delete global[this._oldSuggestFunctionName];
 					}
+					// 每次回调函数不同，保证返回顺序
 					funcName = this._funcPrev + (new Date().getTime() + Math.round(Math.random() * 1000)); 
-					funcName = this._funcPrev + '1234567'; // 本行测试用
+					funcName = this._funcPrev + '1234567'; // 本行测试用，实际中直接删除
 					this._oldSuggestFunctionName = funcName;
 					global[funcName] = bind(function (data) {
 						this.showNewSuggest(data);
@@ -234,12 +327,14 @@
 					}, this);
 					// 请求新的数据
 					script = document.createElement('script');
-					script.src = 'data/new_suggest.js?value=' + v + '&callback=' + funcName;
+					script.id = funcName;
+					script.src = this._suggestUrl + '?value=' + v + '&callback=' + funcName;
 					document.getElementsByTagName('head')[0].appendChild(script);
 				}
 			}
 			// 空白
 			else {
+				this.hideDel();
 				this.dom.list.innerHTML = this._defaultList;
 			}
 		},
@@ -253,19 +348,10 @@
 				className;
 			if (len > 0) {
 				for (; i < len; i++) {
-					if (i === 0) {
-						className = 'first';
-					}
-					else if (i === len - 1) {
-						className = 'last';
-					}
-					else {
-						className = null;
-					}
 					html.push(
-						'<li' + (className ? ' class="' + className + '"' : '') + '>' +
+						'<li>' +
 						'	<i class="icon icon_search"></i>' +
-						'	' + data.list[i] +
+						'	<span class="word">' + data.list[i] + '</span>' +
 						'	<i class="icon icon_add"></i>' +
 						'</li>'
 					);
@@ -349,27 +435,28 @@
 
 	// -------------------------------------------
 	// 页面实例
+	// 注册搜索功能
 	new Search({
-		inputId:   'searchInput',          // 输入框id
-		submitId:  'searchSubmit',         // 提交按钮id
-		listId:    'searchList',           // 列表id
-		deleteId:  'searchDel',            // 删除输入内容的按钮id
-		submitUrl: '搜索%20-2第二页.html'  // 提交链接，搜索数据拼在url后面
-	});
+			'suggestUrl':     'data/new_suggest.js',
+			'prefixCallback': '_cbfnc_'
+		});
 
 	// 加载下一页
 	(function () {
 		var nextPage = $('nextPage'),
 			nextPageLoading = $('nextPageLoading'),
-			pageNumber = 1;
+			pageNumber = 1,
+			// 测试数据路径(请求下一页数据)
+			url = 'data/new_page_data.js';
 
-		addEvent(nextPage, 'click', bind(function (evt) {
+		addEventTap(nextPage, function (evt) {
 				var target;
 				evt = evt || global.event;
 				target = evt.target || evt.srcElement;
 
 				// 返回顶部
 				if (target.className.indexOf('return_top') >= 0) {
+					// 浏览器返回顶部
 					global.document.getElementsByTagName('body')[0].scrollTop = 0;
 				}
 				// 加载下一页
@@ -377,17 +464,15 @@
 					nextPage.style.display = 'none';
 					nextPageLoading.style.display = 'block';
 					
-					// 测试数据路径
-					new Ajax().get('data/new_page_data.js', function (data) {
+					new Ajax().get(url, function (data) {
 							var div, page;
 							if (data) {
 								page = '<a class="page_num" href="#">第' + (++pageNumber) + '页</a>';
 								div = global.document.createElement('div');
-
 								div.innerHTML = page + data;
-
 								nextPage.parentNode.insertBefore(div, nextPage);
 
+								nextPage.innerHTML = '<div class="page_foot"><a href="#" class="next_page">下一页<i class="icon return_top"></i></a></div>';
 								nextPage.style.display = 'block';
 								nextPageLoading.style.display = 'none';
 							}
@@ -403,8 +488,7 @@
 				else {
 					evt.returnValue = false;
 				}
-			}, this));
+			});
 	})();
-
 
 })(this);
