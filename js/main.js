@@ -260,10 +260,7 @@
 		},
 		showList: function () {
 			var list = this.dom.list;
-			if(list) {
-				list.style.height = global.innerHeight - 40 + 'px';
-				list.style.display = 'block';
-			}
+			if(list) { list.style.display = 'block'; }
 		},
 		hideList: function () {
 			var list = this.dom.list;
