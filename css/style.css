@@ -46,7 +46,7 @@ background-color:#016EDB;
 .result_list .dk_content .title .red{color:red;}
 .result_list .dk_content .word{margin:2px 0;line-height:15px;}
 .result_list .dk_content .word a{color:#333;}
-.result_list .dk_content .link{color:red;}
+.result_list .dk_content .link{color:green;}
 .result_list a{color:#00c;}
 .relative_title{font-size:15px;margin:0 0 6px;padding:0 10px;}
 .search_box{position:relative;}
