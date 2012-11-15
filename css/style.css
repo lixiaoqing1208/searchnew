@@ -61,6 +61,7 @@ background-color:#016EDB;
 
 .red{color:red;}
 .next_page,.page_loading{background:url(../images/next_bg.gif) repeat-x;height:22px;font-size:12px;text-align:center;line-height:22px;margin:15px 0 7px;display:block;color:#333;text-decoration:none;}
+.result_list .next_page,.result_list .page_loading{color:#333;}
 .rel_list{padding:0 10px;}
 .rel_list li{float:left;height:24px;width:150px;}
 .rel_list{}
@@ -81,7 +82,7 @@ background-color:#016EDB;
 .score .number_threeMid{width:36px;}
 .score .number_fourMid{width:49px;}
 .score .number_fiveMid{width:62px;}
-.app_link{display:inline-block;width:76px;height:25px;font-size:15px;line-height:25px;color:#333;text-align:center;margin-right:8px;color:#333;
+.result_list .app_link{display:inline-block;width:76px;height:25px;font-size:15px;line-height:25px;color:#333;text-align:center;margin-right:8px;color:#333;
 box-shadow:1px 1px 2px #909090;
 border-radius:3px;
     background-color:#CFCFCF;
