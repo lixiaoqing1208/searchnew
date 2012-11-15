@@ -47,6 +47,7 @@ background-color:#016EDB;
 .result_list .dk_content .word{margin:2px 0;line-height:15px;}
 .result_list .dk_content .word a{color:#333;}
 .result_list .dk_content .link{color:#008000;}
+.result_list a{color:#00c;}
 .relative_title{font-size:15px;margin:0 0 6px;padding:0 10px;}
 .search_box{position:relative;}
 .result_wrap .input_search{border:none;-webkit-border-radius:3px; background:#cacfc8; width:160px;height:25px;padding-left:5px;font-size:15px;
