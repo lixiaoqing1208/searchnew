@@ -46,7 +46,7 @@ background-color:#016EDB;
 .result_list .dk_content .title .red{color:red;}
 .result_list .dk_content .word{margin:2px 0;line-height:15px;}
 .result_list .dk_content .word a{color:#333;}
-.result_list .dk_content .link{color:blue;}
+.result_list .dk_content .link{color:#008000;}
 .relative_title{font-size:15px;margin:0 0 6px;padding:0 10px;}
 .search_box{position:relative;}
 .result_wrap .input_search{border:none;-webkit-border-radius:3px; background:#cacfc8; width:160px;height:25px;padding-left:5px;font-size:15px;
@@ -83,6 +83,7 @@ background-color:#016EDB;
 .app_link{display:inline-block;width:76px;height:25px;font-size:15px;line-height:25px;color:#333;text-align:center;margin-right:8px;
 box-shadow:1px 1px 2px #909090;
 border-radius:3px;
+    background-color:#CFCFCF;
      background:-webkit-linear-gradient(#EFEFEF,#ccc);}
 .app_opt{padding-bottom:7px;}
 .novel_text{font-size:12px;margin:8px 0 10px;}
