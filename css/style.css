@@ -81,11 +81,11 @@ background-color:#016EDB;
 .score .number_threeMid{width:36px;}
 .score .number_fourMid{width:49px;}
 .score .number_fiveMid{width:62px;}
-.app_link{display:inline-block;width:76px;height:25px;font-size:15px;line-height:25px;color:#333;text-align:center;margin-right:8px;
+.app_link{display:inline-block;width:76px;height:25px;font-size:15px;line-height:25px;color:#333;text-align:center;margin-right:8px;color:#333;
 box-shadow:1px 1px 2px #909090;
 border-radius:3px;
     background-color:#CFCFCF;
-     background:-webkit-linear-gradient(#EFEFEF,#ccc);}
+    background:-webkit-linear-gradient(#EFEFEF,#ccc);}
 .app_opt{padding-bottom:7px;}
 .novel_text{font-size:12px;margin:8px 0 10px;}
 
