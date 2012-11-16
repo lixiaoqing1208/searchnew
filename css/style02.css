@@ -96,7 +96,7 @@ border-radius:3px;
 .top .title{text-align:center;font-size:18px;font-weight:bold;height:41px;line-height:40px;}
 .top .title a{color:#333;}
 .return_prev{height:41px;width:63px;background:url(../images/return_prev.gif) no-repeat;display:block;}
-.prev_page{background:url(../images/top_line.gif) no-repeat;float:right;font-size:16px;color:#333;height:31px;padding-top:10px;width:54px;padding-left:10px;}
+.prev_page{background:url(../images/top_line.gif) no-repeat; float:right;font-size:16px;color:#333;height:41px;line-height:41px;width:54px;padding-left:10px;}
 .article{margin:7px 0;padding:0 10px;}
 .article .title{font-size:15px;}
 .article .title_info{font-size:12px;margin-bottom:2px;}
