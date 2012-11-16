@@ -91,7 +91,7 @@ border-radius:3px;
 .novel_text{font-size:12px;margin:8px 0 10px;}
 
 .top{background:url(../images/top_bg.gif) repeat-x;height:41px;}
-.top .title{padding-top:10px;text-align:center;font-size:18px;font-weight:bold;}
+.top .title{padding-top:10px;text-align:center;font-size:18px;font-weight:bold;display:block;}
 .return_prev{height:41px;width:63px;float:left;background:url(../images/return_prev.gif) no-repeat;}
 .prev_page{background:url(../images/top_line.gif) no-repeat; float:right;font-size:16px;color:#333;height:41px;line-height:41px;width:54px;padding-left:10px;}
 .article{margin:7px 0;padding:0 10px;}
