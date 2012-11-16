@@ -14,15 +14,21 @@ body{font-size:12px;line-height:1.6em;color:#333;background:#fff;font-family:"Mi
 .input_search,.input_submit{vertical-align:middle;}
 .index_wrap{text-align:center;}
 .index_wrap h1{font-size:20px;margin:5em 0 1em;}
-.index_wrap .input_search{border:none;-webkit-border-radius:5px; background:#cacfc8; width:205px;height:30px;padding-left:5px;font-size:15px;
+.index_wrap .input_search{border:none; background:#cacfc8; width:205px;height:30px;padding-left:5px;font-size:15px;
+border-radius:5px;
+box-shadow:1px 1px 3px #a4a7a3 inset;
+-webkit-border-radius:5px;
 -webkit-box-shadow:1px 1px 3px #a4a7a3 inset;
 -webkit-transition:width 0.2s linear;}
 .index_wrap h1{ -webkit-transition:margin 0.2s linear,opacity 0.2s linear;}
 .search_onfocus h1{margin:0;opacity:0;display:none;}
-.index_wrap .input_submit{cursor:pointer;border:none;margin:0px 0 0 -5px;-webkit-border-radius:5px; vertical-align:middle;color:#fff;width:50px;height:32px;font-size:15px;
-background-color:#016EDB;
+.index_wrap .input_submit{cursor:pointer;border:none;margin:0px 0 0 -5px;vertical-align:middle;color:#fff;width:50px;height:32px;font-size:15px;
+    background-color:#016EDB;
     background:-webkit-linear-gradient(#0280FD,#005AB3);
-    -webkit-box-shadow:1px 1px 1px #a4a7a3;}
+    box-shadow:1px 1px 1px #a4a7a3;
+    border-radius:5px;
+    -webkit-box-shadow:1px 1px 1px #a4a7a3;
+    -webkit-border-radius:5px; }
 .index_wrap .about_us{margin:6em 0 1em;}
 .index_wrap .about_us a{color:#333;text-decoration:none;}
 .index_wrap .index_search{position:relative;width:255px;margin:0 auto;}
@@ -51,12 +57,17 @@ background-color:#016EDB;
 .result_list .dk_content .word{margin:2px 0;line-height:15px;}
 .relative_title{font-size:15px;margin:0 0 6px;padding:0 10px;}
 .search_box{position:relative;}
-.result_wrap .input_search{border:none;-webkit-border-radius:3px; background:#cacfc8; width:160px;height:25px;padding-left:5px;font-size:15px;
--webkit-box-shadow:1px 1px 3px #a4a7a3 inset;
--webkit-transition:width 0.2s linear;}
-.result_wrap .input_submit{cursor:pointer;border:none;margin:0px 0 0 -5px;-webkit-border-radius:5px; vertical-align:middle;color:#fff;width:50px;height:25px;font-size:15px;
-background-color:#016EDB;
-    background:-webkit-linear-gradient(#027efa,#2b547d);}
+.result_wrap .input_search{border:none; background:#cacfc8; width:160px;height:25px;padding-left:5px;font-size:15px;
+    border-radius:3px;
+    box-shadow:1px 1px 3px #a4a7a3 inset;
+    -webkit-border-radius:3px;
+    -webkit-box-shadow:1px 1px 3px #a4a7a3 inset;
+    -webkit-transition:width 0.2s linear;}
+.result_wrap .input_submit{cursor:pointer;border:none;margin:0px 0 0 -5px;vertical-align:middle;color:#fff;width:50px;height:25px;font-size:15px;
+    background-color:#016EDB;
+    background:-webkit-linear-gradient(#027efa,#2b547d);
+    border-radius:5px;
+    -webkit-border-radius:5px; }
 .result_wrap .index_search{margin:4px 0 0 10px;width:230px;float:left;}
 
 
@@ -84,8 +95,10 @@ background-color:#016EDB;
 .score .number_fourMid{width:49px;}
 .score .number_fiveMid{width:62px;}
 .result_list .app_link{display:inline-block;width:76px;height:25px;font-size:15px;line-height:25px;color:#333;text-align:center;margin-right:8px;color:#333;
--webkit-box-shadow:1px 1px 2px #909090;
-border-radius:3px;
+    border-radius:3px;
+    box-shadow:1px 1px 2px #909090;
+    -webkit-border-radius:3px;
+    -webkit-box-shadow:1px 1px 2px #909090;
     background-color:#CFCFCF;
     background:-webkit-linear-gradient(#EFEFEF,#ccc);}
 .app_opt{padding-bottom:7px;}
@@ -120,8 +133,8 @@ border-radius:3px;
 .copyright{font-size:12px;font-family:arial;color:#999;text-align:right;margin:2px 0 4px;}
 .index_wrap .copyright{text-align:center;}
 
-.search_onfocus .input_search{height:25px;-webkit-border-radius:2px 0 0 2px;background:#E6E7E4;width:220px;}
-.search_onfocus .input_submit{height:27px;-webkit-border-radius:2px;}
+.search_onfocus .input_search{height:25px;border-radius:2px 0 0 2px;-webkit-border-radius:2px 0 0 2px;background:#E6E7E4;width:220px;}
+.search_onfocus .input_submit{height:27px;border-radius:2px;-webkit-border-radius:2px;}
 .search_onfocus .index_search{width:312px;margin:13px auto;display:block;position:relative;text-align:center;float:none;}
 .search_onfocus .copyright{display:none;}
 .search_onfocus .result_list{display:none;}
