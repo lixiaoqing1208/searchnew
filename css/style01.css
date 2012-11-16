@@ -9,6 +9,7 @@ body{font-size:12px;line-height:1.6em;color:#333;background:#fff;font-family:"Mi
 .grey{color:#333;}
 .green{color:#008000;}
 .blue{color:#FF8401;}
+.lightgrey{color:#999;text-decoration:underline;}
 /**首页**/
 .input_search,.input_submit{vertical-align:middle;}
 .index_wrap{text-align:center;}
