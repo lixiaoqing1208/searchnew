@@ -42,11 +42,10 @@ background-color:#016EDB;
 .result_list{border-top:1px solid #E0E3DF;margin-top:10px;padding-top:7px;}
 .result_list .dk_content{margin-bottom:12px;padding:0 10px;}
 .result_list .dk_content p{margin:0;}
-.result_list .dk_content a .title{color:#00c;}
 .result_list .dk_content .title{font-size:15px;}
 .result_list .dk_content .title .red{color:red;}
 .result_list .dk_content .word{margin:2px 0;line-height:15px;}
-.result_list .dk_content a .word{color:#333;}
+.result_list .dk_content .word a{color:#333;}
 .result_list .dk_content .link{color:green;}
 .relative_title{font-size:15px;margin:0 0 6px;padding:0 10px;}
 .search_box{position:relative;}
