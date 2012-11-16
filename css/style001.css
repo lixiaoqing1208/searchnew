@@ -8,7 +8,7 @@ body, p, form, input, textarea, h1, h2, h3, h4, h5, h6, ul, dl, dd, dt, table, t
 body{font-size:12px;line-height:1.6em;color:#333;background:#fff;font-family:"Microsoft YaHei";}img{border:0}form{margin:0;padding:0}.a{padding-top:6px;margin-top:6px;margin-bottom:6px}.h{color:#c60a00}.s{font-size:small}.b{font-size:small;color:#77C}li,ul{margin:0;padding:0;list-style:none;}.l{float:left;display:inline;}a{text-decoration:none;color:#00c;}
 .grey{color:#333;}
 .green{color:#008000;}
-.blue{color:#00c;}
+.blue{color:#FF8401;}
 /**首页**/
 .input_search,.input_submit{vertical-align:middle;}
 .index_wrap{text-align:center;}
