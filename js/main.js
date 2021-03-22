@@ -12,11 +12,12 @@
 	}
 	// 去除空格
 	function trim (s) {
-		return s.replace(/^\s+|\s+$/g, '');
+		return s.replace(/^\s+|\s+$/g, '')
 	}
 
 	// 添加事件句柄
-	function addEvent (dom, type, callback) {
+
+	function addEvent (dom,type, callback) {
 		if (!dom) {
 			return;
 		}
