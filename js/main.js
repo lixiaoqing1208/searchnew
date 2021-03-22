@@ -54,6 +54,7 @@
 		this.dom = {};
 		this.dom.input = $(config.inputId);
 		this.dom.submit = $(config.submitId);
+
 		this.dom.list = $(config.listId);
 
 		this.dom.del = $(config.deleteId);
@@ -61,8 +62,8 @@
 		// 一旦提交就不可再次提交
 		this._submitLock = false;
 
-		this.submitUrl =config.submitUrl || '';
-		this._funcPrev = config.funcPrev || '_cbfnc_';
+		this.submitUrl =config.submitUrl|| '';
+		this._funcPrev =config.funcPrev || '_cbfnc_';
 		this._oldSuggestFunctionName;
 
 		// 保证所需id都存在
