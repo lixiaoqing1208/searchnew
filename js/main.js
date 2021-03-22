@@ -15,9 +15,11 @@
 	function trim (s) {
 		return s.replace(/^\s+|\s+$/g, '');
 	}
+
 	// 添加事件句柄
 	function addEvent (dom, type, callback) {
-		if (!dom) {return;}
+		if (!dom) {
+			return;}
 		if (dom.addEventListener) {
 			dom.addEventListener(type, callback, false);
 		}
