@@ -17,7 +17,7 @@
 
 
 	// 添加事件句柄
-	function addEvent(dom, type, callback) {
+	function addEvent(dom,type,callback) {
 		if (!dom) {
 			return;
 		}
