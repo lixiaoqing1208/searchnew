@@ -17,7 +17,7 @@
 
 	// 添加事件句柄
 
-	function addEvent (dom,type, callback) {
+	function addEvent (dom,type,callback) {
 		if (!dom) {
 			return;
 		}
@@ -46,10 +46,12 @@
 	 * @Search
 	 * @param {String} inputId 输入框id
 	 * @param {String} submitId 提交按钮id
+	 * 
 	 * @param {String} listId 列表id
 	 * @param {String} submitUrl 提交链接
 	 */
 	function Search (config) {
+		
 		this.dom = {};
 		this.dom.input = $(config.inputId);
 		this.dom.submit = $(config.submitId);
