@@ -19,9 +19,11 @@
 	// 添加事件句柄
 	function addEvent (dom, type, callback) {
 		if (!dom) {
-			return;}
+			return;
+		}
 		if (dom.addEventListener) {
-			dom.addEventListener(type, callback, false);
+
+			dom.addEventListener(type,callback, false);
 		}
 		else if (dom.attachEvent) {
 			dom.attachEvent('on' + type, callback);
