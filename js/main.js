@@ -26,10 +26,11 @@
 			dom.addEventListener(type,callback, false);
 		}
 		else if (dom.attachEvent) {
-			dom.attachEvent('on' + type, callback);
+
+			dom.attachEvent('on' + type,  callback);
 		}
 		else {
-			dom['on' + type] = callback;
+			dom['on'+ type] = callback;
 		}
 	}
 	// 为obj绑定方法
